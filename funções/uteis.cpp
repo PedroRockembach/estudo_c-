@@ -25,10 +25,3 @@ string to_upper(string s)
 	}
 	return s;
 }
-int main()
-{
-	string lower = to_lower("Casei Na Rua Sete");
-	cout << lower;
-	
-	return 0;
-}
