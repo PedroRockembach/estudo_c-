@@ -41,3 +41,29 @@ string strip(const string& s) {
     
     return s.substr(first, (last - first + 1));
 }
+
+string lstrip (const string& s)
+{
+	const string WHITESPACE = " \n\r\t\f\v";
+	
+	//PRIMEIRO CARACTERE QUE NÃO É ESPAÇO
+	size_t first = s.find_first_not_of(WHITESPACE);
+	
+	if (string::npos == first) 
+	{
+		return "";
+		
+	}
+	return s.substr(first);
+}
+
+string rstrip(const string& s) {
+    const string WHITESPACE = " \n\r\t\f\v";
+    
+    size_t last = s.find_last_not_of(WHITESPACE);
+    
+    if (string :: npos == last) {
+        return "";
+    }
+    return s.substr(0, last + 1);
+}

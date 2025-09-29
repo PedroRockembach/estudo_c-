@@ -1,17 +1,22 @@
 #include <iostream>
 #include "uteis.h"
 
-int main()
-{
-	string frase_inicial = "";
-	cout << "Digite uma frase: ";
-	cin >> frase_inicial;
-	
-	cout << frase_inicial << endl;
-	
-	string frase_baixa = to_lower(frase_inicial);
-	string frase_alta = to_upper(frase_inicial);
-	string limpa = strip(frase_inicial);
-	
-	cout << limpa;
+// --- Função main para testar tudo ---
+int main() {
+    string texto_teste = "   \n  Ola Mundo, Bem-Vindo ao C++!   \t ";
+
+    cout << "Original:     '" << texto_teste << "'\n\n";
+
+    cout << "to_lower:     '" << to_lower(texto_teste) << "'\n";
+    cout << "to_upper:     '" << to_upper(texto_teste) << "'\n";
+    cout << "lstrip:       '" << lstrip(texto_teste) << "'\n";
+    cout << "rstrip:       '" << rstrip(texto_teste) << "'\n";
+    cout << "trim:         '" << strip(texto_teste) << "'\n\n";
+
+    // Encadeando as funções
+    string resultado_final = strip(to_upper(texto_teste));
+    cout << "Tudo junto:   '" << resultado_final << "'\n";
+
+    return 0;
+    
 }
