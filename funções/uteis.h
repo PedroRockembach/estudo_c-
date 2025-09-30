@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+#include <cctype>
 
 using namespace std;
 
@@ -67,3 +68,37 @@ string rstrip(const string& s) {
     }
     return s.substr(0, last + 1);
 }
+
+bool string_isalpha(const string& s)
+{
+	if (s == "")
+	{
+		return false;
+	}
+	for (char c : s)
+	{
+		// se algum caracter não for alpha(A-Z,a-z) retorna false
+		if (!std::isalpha(c))
+		return false;
+	}
+	return true;
+}
+
+bool string_isdigit(const string& d)
+{
+	if (d.empty())
+	{
+		return false;
+	}
+	for (char c : d)
+	{
+		// se algum caracter não for digito (0-9) retorna false
+		if (!std::isdigit(c))
+		{
+			return false;
+			
+		}
+	}
+	return true;
+}
+

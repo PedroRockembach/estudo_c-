@@ -5,12 +5,12 @@ using namespace std;
 
 struct pessoa
 {
-	
 		int idade;
 		string nome;
 		char sexo;
 };
-	void mostrar(pessoa *cad)
+
+void mostrar(pessoa *cad)
 {
 	cout << endl;
 		for (int i = 0; i < NUMERO;i++)
@@ -38,12 +38,10 @@ struct pessoa
 
 int main()
 {
-
-	int x = 0;
 	
 	pessoa cadastro[NUMERO];
 	
-	for (x; x < NUMERO; x++)
+	for (int x = 0; x < NUMERO; x++)
 	{
 		cout << "Informe o nome da pessoa "  << x+1 <<": ";
 		cin >> cadastro[x].nome;
