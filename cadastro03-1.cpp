@@ -3,6 +3,7 @@
 #include <limits>   
 #include <cctype>   
 #include "parametros.h"
+#include "uteis.h"
 
 using namespace std;
 
@@ -12,13 +13,15 @@ struct pessoa
 		string nome;
 		char sexo;
 };
+
 bool valid_name(const string&nome)
 {
-	if (nome.empty())
+	string nome_limpo = strip(nome);
+	if (nome_limpo.empty())
 	{
 		return false;
 	}
-	for (char c : nome)
+	for (char c : nome_limpo)
 	{
 		if (!isalpha(c) && !isspace(c))
 		{
@@ -49,11 +52,10 @@ void mostrar(pessoa *cad)
 			else
 			{
 				cout
-				 << "Idade: " << cad[i].idade<< endl;
+				<< endl << "Idade: " << cad[i].idade<< endl;
 			}
 		}
 }
-
 int main()
 {
 	
@@ -69,7 +71,7 @@ int main()
 			cout << "Informe um nome valido! Usando caracteres e espaços apenas." << endl << ">";
 			getline(cin, cadastro[x].nome);
 		}
-		
+		/////////////////////////////////
 		cout << "Informe a idade da pessoa "<< x + 1 <<" :";
 		while(!(cin >> cadastro[x].idade) || cadastro[x].idade < 0)
 		{
@@ -78,22 +80,30 @@ int main()
 			cin.clear();
 			limpa_buffer();
 		}
-		
-		
+		//////////////////////////////////////
 		cout << "Informe o sexo da pessoa "<< x + 1 <<":";
-		while (!(cin >> cadastro[x].sexo) || (tolower(cadastro[x].sexo) != 'm') && tolower(cadastro[x].sexo) != 'f')
-		{
-			cout << "ERRO! Informe seu sexo com M ou F." << endl << ">";	
-			
-			cin.clear();
-			limpa_buffer();
-		}
-				
+		string sexo_inicial;
 		
+		limpa_buffer();
+		
+		while (getline(cin, sexo_inicial))
+		{
+			if (sexo_inicial.length() == 1 && ((tolower(sexo_inicial[0]) == 'm') || (tolower(sexo_inicial[0]) == 'f')))
+			{
+				cadastro[x].sexo = tolower(sexo_inicial[0]);
+				break;	
+			}
+			else
+			{
+				cout << "ERRO! Informe seu sexo com M ou F." << endl << ">";	
+			}
+		}
+		/////////////////////////////////////////
 		cout << "Cadastrado!" << endl;
 		
 		limpa_buffer();
-	}
+		
+		
 	cout << endl;
 	mostrar(cadastro);
 }
