@@ -37,32 +37,34 @@ void limpa_buffer()
 void mostrar(pessoa *cad)
 {
 	cout << endl;
+	
 		for (int i = 0; i < NUMERO;i++)
 		{
+			cout << "--------------------------------" << endl;
 				cout
 				 << "Pessoa: "<< i + 1 << endl
 				 << "Nome: " << cad[i].nome << endl
-				 << "Sexo: " << cad[i].sexo;
-			
+				 << "Sexo: " << cad[i].sexo
+				 << endl;
 			if (cad[i].sexo == 'f')
 			{
 				cout 
-				 << "Não é elegante perguntar a idade de uma dama.";
+				 << "Nao eh elegante perguntar a idade de uma dama." << endl;
 			}
 			else
 			{
 				cout
-				<< endl << "Idade: " << cad[i].idade<< endl;
+				<< endl << "Idade: " << cad[i].idade << endl;
 			}
 		}
 }
 int main()
 {
-	
 	pessoa cadastro[NUMERO];
 	
 	for (int x = 0; x < NUMERO; x++)
 	{
+		cout << "--------------------------------" << endl;
 		cout << "Informe o nome da pessoa "  << x+1 <<":";
 		getline(cin,cadastro[x].nome);
 		
@@ -72,7 +74,7 @@ int main()
 			getline(cin, cadastro[x].nome);
 		}
 		/////////////////////////////////
-		cout << "Informe a idade da pessoa "<< x + 1 <<" :";
+		cout << "Informe a idade da pessoa "<< x + 1 <<":";
 		while(!(cin >> cadastro[x].idade) || cadastro[x].idade < 0)
 		{
 			cout << "ERRO! Idade invalida, insira somente numeros positivos." << endl << ">";
@@ -80,7 +82,7 @@ int main()
 			cin.clear();
 			limpa_buffer();
 		}
-		//////////////////////////////////////
+
 		cout << "Informe o sexo da pessoa "<< x + 1 <<":";
 		string sexo_inicial;
 		
@@ -98,12 +100,8 @@ int main()
 				cout << "ERRO! Informe seu sexo com M ou F." << endl << ">";	
 			}
 		}
-		/////////////////////////////////////////
 		cout << "Cadastrado!" << endl;
-		
-		limpa_buffer();
-		
-		
-	cout << endl;
+	}	
 	mostrar(cadastro);
+	
 }
