@@ -14,5 +14,5 @@ int main()
 	cin >> nome_metade;
 	
 	cout << "Nome completo usando getline : "<< nome_completo << endl;
-	cout << "Nome cortando no espaço com Cin : "<< nome_metade;
+	cout << "Nome cortando no espaco com Cin : "<< nome_metade;
 }

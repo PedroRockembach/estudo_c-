@@ -1,5 +1,6 @@
 #include <iostream>
 #include "parametros.h"
+#include <limits>
 
 using namespace std;
 
@@ -9,7 +10,21 @@ struct pessoa
 		string nome;
 		char sexo;
 };
-
+bool valid_name(const string&nome)
+{
+	if (nome.empty())
+	{
+		return false;
+	}
+	for (char c : nome)
+	{
+		if (!isalpha(c) && !isspace(c))
+		{
+			return false;
+		}
+	}
+	return true;
+}
 void mostrar(pessoa *cad)
 {
 	cout << endl;
@@ -44,12 +59,24 @@ int main()
 	for (int x = 0; x < NUMERO; x++)
 	{
 		cout << "Informe o nome da pessoa "  << x+1 <<": ";
-		cin >> cadastro[x].nome;
+		getline(cin,cadastro[x].nome);
+		
+		while(!valid_name(cadastro[x].nome))
+		{
+			cout << "Informe um nome valido! Usando caracteres e espaços apenas.";
+			getline(cin, cadastro[x].nome);
+		}
 		
 		cout << "Informe a idade "<< x <<" pessoa: ";
-		cin >> cadastro[x].idade;
+		while(!(cin >> cadastro[x].idade) || cadastro[x].idade < 0)
+		{
+			cout << "ERRO! Idade invalida, insira somente numeros positivos " << endl << ">";
+			
+			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
 		
-		cout << "Informe o sexo " << x <<" pessoa(M/F): ";
+		cout << "Informe o sexo da  "<< x <<" pessoa: ";
 		cin >> cadastro[x].sexo;		
 		
 		cout << "Cadastrado!" << endl;
