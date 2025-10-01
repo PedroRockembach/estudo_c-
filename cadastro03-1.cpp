@@ -1,6 +1,8 @@
 #include <iostream>
+#include <string>   
+#include <limits>   
+#include <cctype>   
 #include "parametros.h"
-#include <limits>
 
 using namespace std;
 
@@ -25,30 +27,31 @@ bool valid_name(const string&nome)
 	}
 	return true;
 }
+void limpa_buffer()
+{
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
 void mostrar(pessoa *cad)
 {
 	cout << endl;
 		for (int i = 0; i < NUMERO;i++)
 		{
-			if (cad[i].sexo == 'f' || cad[i].sexo == 'F')
-			{
-				cout << "Pessoa: "<< i + 1 << endl
+				cout
+				 << "Pessoa: "<< i + 1 << endl
 				 << "Nome: " << cad[i].nome << endl
-				 << "Sexo: " << cad[i].sexo<< endl
-				 <<endl
-				 <<endl;
+				 << "Sexo: " << cad[i].sexo;
+			
+			if (cad[i].sexo == 'f')
+			{
+				cout 
+				 << "Não é elegante perguntar a idade de uma dama.";
 			}
 			else
 			{
-				cout << "Pessoa: "<< i + 1 << endl
-				 << "Idade: " << cad[i].idade<< endl
-				 << "Nome: " << cad[i].nome << endl
-				 << "Sexo: " << cad[i].sexo<< endl
-				 <<endl
-				 <<endl;
+				cout
+				 << "Idade: " << cad[i].idade<< endl;
 			}
 		}
-		
 }
 
 int main()
@@ -58,28 +61,38 @@ int main()
 	
 	for (int x = 0; x < NUMERO; x++)
 	{
-		cout << "Informe o nome da pessoa "  << x+1 <<": ";
+		cout << "Informe o nome da pessoa "  << x+1 <<":";
 		getline(cin,cadastro[x].nome);
 		
 		while(!valid_name(cadastro[x].nome))
 		{
-			cout << "Informe um nome valido! Usando caracteres e espaços apenas.";
+			cout << "Informe um nome valido! Usando caracteres e espaços apenas." << endl << ">";
 			getline(cin, cadastro[x].nome);
 		}
 		
-		cout << "Informe a idade "<< x <<" pessoa: ";
+		cout << "Informe a idade da pessoa "<< x + 1 <<" :";
 		while(!(cin >> cadastro[x].idade) || cadastro[x].idade < 0)
 		{
-			cout << "ERRO! Idade invalida, insira somente numeros positivos " << endl << ">";
+			cout << "ERRO! Idade invalida, insira somente numeros positivos." << endl << ">";
 			
 			cin.clear();
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			limpa_buffer();
 		}
 		
-		cout << "Informe o sexo da  "<< x <<" pessoa: ";
-		cin >> cadastro[x].sexo;		
+		
+		cout << "Informe o sexo da pessoa "<< x + 1 <<":";
+		while (!(cin >> cadastro[x].sexo) || (tolower(cadastro[x].sexo) != 'm') && tolower(cadastro[x].sexo) != 'f')
+		{
+			cout << "ERRO! Informe seu sexo com M ou F." << endl << ">";	
+			
+			cin.clear();
+			limpa_buffer();
+		}
+				
 		
 		cout << "Cadastrado!" << endl;
+		
+		limpa_buffer();
 	}
 	cout << endl;
 	mostrar(cadastro);
